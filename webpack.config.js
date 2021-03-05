@@ -12,9 +12,10 @@ module.exports = () => {
     devServer: {
       publicPath: "/build/",
       historyApiFallback: true,
-      proxy: {
-        '/': 'http://localhost:3000'
-      }
+      contentBase: './client',
+      // proxy: {
+      //   '/': 'http://localhost:3000'
+      // }
     },
     output: {
       path: path.resolve(__dirname, "build"),
