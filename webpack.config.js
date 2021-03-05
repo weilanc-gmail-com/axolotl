@@ -13,6 +13,7 @@ module.exports = () => {
       publicPath: "/build/",
       historyApiFallback: true,
       proxy: {
+        '/': 'http://localhost:3000'
       }
     },
     output: {
