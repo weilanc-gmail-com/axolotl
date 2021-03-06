@@ -3,7 +3,6 @@
 
 const express = require("express");
 const path = require("path");
-const cookieParser = require('cookie-parser');
 
 const userController = require('../controllers/userController');
 
@@ -13,13 +12,11 @@ const PORT = 3000;
 // parses incoming request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended : true}));
-app.use(cookieParser);
 
 
 // OAUTH LOGIN REQUEST
 
 // authorized routes
-
 
 // BOILERPLATE STUFF //
 
