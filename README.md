@@ -17,6 +17,26 @@ scope https://github.com/login/oauth/authorize?
   %20read:user
 
 
+
+  
+
+const [state, setState] = useState(SomeState);
+
+    the two values in the array can be anything they are just variables.
+    you are deconstructing like you would do with an object.
+    the first value(state) is the value in state.
+    the second value(setState) is the function you will call to changeState
+    the propper way to do this is with a callback inside that takes in
+    'prevState' where State is the name of your current state value (just state in this example)
+
+    TRIVIAL EXAMPLE: 
+    const [count, setCount] = useState(5);
+    //increment count
+    function incrementCount() => {
+      setCount(prevCount => prevCount + 1);
+      //increments our count in state to 6
+    }
+
    You can use the useState() hook for each piece of state you want to keep track of.
     e.g.
     
