@@ -15,3 +15,18 @@ scope https://github.com/login/oauth/authorize?
   %20user:follow
   %20user:email
   %20read:user
+
+
+   You can use the useState() hook for each piece of state you want to keep track of.
+    e.g.
+    
+    const [count, setCount] = useState(5);
+    const [userId, setUserId] = useState(userId);
+    const [matches, setMatches] = useState(matches);
+
+    One last thing is all instances of useState MUST be called in the same order on every render
+    this means you cannot use the hook inside of functions or if statements. 
+    You should also put your useState hooks at the very top of your component.
+    Putting the setState function inside of conditons is fine, 
+    you just cant initialize the values in a different order on render.
+  
