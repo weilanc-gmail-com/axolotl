@@ -1,21 +1,40 @@
+
+/**
+ * ************************************************************************
+ *
+ * @description IMPORTS AND SERVER SETUP 
+ *
+ * ************************************************************************
+ */
+
 const express = require("express");
 const path = require("path");
-require("dotenv").config()
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');  // allows requests to be made in dev mode
+require("dotenv").config();
+
+const db = require('./routes/databaseRoutes');
+
 const app = express();
 const PORT = 3000;
 
+// parses incoming request bodies
 app.use(express.json());
 app.use(express.urlencoded());
-app.use("/build", express.static(path.join(__dirname, "../build")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/index.html"));
-});
+/**
+ * ************************************************************************
+ *
+ * @description OAUTH ROUTES
+ *
+ * ************************************************************************
+ */
+
+// OAUTH LOGIN REQUEST
+
+// authorized routes
 
 //fyi stored in .env locals to keep secret had to install dotenv, and write in gitgnore
 const client_id = process.env.GH_CLIENT_ID
-
 const client_secret = process.env.GH_CLIENT_SECRET
 
 
@@ -79,9 +98,40 @@ fetch('https://github.com/login/oauth/access_token',{
 //client ID 5c3312c7f96f4983b9c7
 
 
+/**
+ * ************************************************************************
+ *
+ * @description BOILERPLATE ROUTES/MIDDLEWARE
+ *
+ * ************************************************************************
+ */
 
+app.use("/build", express.static(path.join(__dirname, "../build")));
+
+// serves index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index.html"));
+});
+
+// catch-all route handler for requests to unknown routes
+app.use((req, res) => res.status(404).send('This page does not exist.'))
+
+// global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  },
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log('Error message: ', errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
+});
+
+// starts server
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 });
+
 
 module.export = app;
