@@ -10,6 +10,7 @@
 const express = require("express");
 const path = require("path");
 const fetch = require('node-fetch');  // allows requests to be made in dev mode
+const cors = require('cors');
 require("dotenv").config();
 
 const db = require('./routes/databaseRoutes');
@@ -18,6 +19,7 @@ const app = express();
 const PORT = 3000;
 
 // parses incoming request bodies
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -39,11 +41,11 @@ const client_secret = process.env.GH_CLIENT_SECRET
 
 
 
+
 //redirect to request Github acess this should probably be on client side
 app.get("/login", (req,res)=>{
   const url =`https://github.com/login/oauth/authorize?client_id=${client_id}`
-  res.redirect(url)
-
+  res.status(200).json(url);
 })
 
 
@@ -57,7 +59,7 @@ app.get('/user/home', (req,res)=>{
   }
 
  
-console.log(req.query.code)
+console.log('CODE: ', req.query.code)
   //  getAccessToken(code)or
 fetch('https://github.com/login/oauth/access_token',{
     method:"POST",
@@ -72,9 +74,9 @@ fetch('https://github.com/login/oauth/access_token',{
   }).then(response => response.text())
     .then(data => new URLSearchParams(data))
     .then(params => {
-      console.log(params);
+      console.log('ACCESS_TOKEN: ', params);
     })
-
+    res.redirect('/home');
 })
 
 
@@ -122,7 +124,7 @@ app.use((err, req, res, next) => {
     log: 'Express error handler caught unknown error',
     status: 500,
     message: { err: 'An error occurred' },
-  },
+  }
   const errorObj = Object.assign({}, defaultErr, err);
   console.log('Error message: ', errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);

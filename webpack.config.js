@@ -13,9 +13,10 @@ module.exports = () => {
       publicPath: "/build/",
       historyApiFallback: true,
       contentBase: './client',
-      // proxy: {
-      //   '/': 'http://localhost:3000'
-      // }
+      proxy: {
+        context: ["/login"],
+        target: 'http://localhost:3000'
+      }
     },
     output: {
       path: path.resolve(__dirname, "build"),
