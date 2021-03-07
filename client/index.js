@@ -8,7 +8,6 @@ import styles from './sass/combined.scss';
 render(
     <Router>
         <App />
-        
     </Router>, 
     document.getElementById("root")
 )
