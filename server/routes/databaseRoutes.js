@@ -3,7 +3,6 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-
 // handles requests to login
 router.post('/login', 
   userController.checkUser,

@@ -9,9 +9,8 @@ const userController = {};
 
 // checks the database for the user
 userController.checkUser = (req, res, next) => {
-  
   const username = [req.body.username]; // save Github username on req.body
-  const statement = `SELECT _id, username, user_info FROM people WHERE username = $1`
+  const statement = `SELECT _id, username, user_profile FROM people WHERE username = $1`
 
   db.query(statement, username, (err, result) => {
     if (err) {
@@ -26,7 +25,7 @@ userController.checkUser = (req, res, next) => {
         console.log('User does not exist in database. Need to add user to the database.');
         return next();
       } else { // if the user is in the database, send back user information and rediret to home page
-        res.locals.user = result.rows[0]; 
+        res.locals.user = result.rows[0];
         console.log('User exists in the database. Redirecting to home page.');
         return res.status(200).json(res.locals.user).redirect('/homepage-url'); // is this allowed??? reroutes to home page somehow 
       }
@@ -76,7 +75,7 @@ userController.checkProfile = (req, res, next) => {
       });
     } else {
       // if the user doesn't have a profile set up, res.locals.profile will be empty and the user info page should display nothing. otherwise, user info page should display data on res.locals.profile
-      res.locals.profile = response.rows[0];
+      res.locals.profile = result.rows[0];
       console.log('User profile found.');
       return next();
     }
