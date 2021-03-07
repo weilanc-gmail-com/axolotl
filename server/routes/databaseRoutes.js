@@ -9,7 +9,7 @@ router.post('/login',
   userController.checkUser,
   userController.addUser,
   (req, res) => {
-    return res.status(200).redirect('/homepage-url');
+    return res.status(200).json(res.locals.user).redirect('/homepage-url');
   }
 );
 
@@ -17,7 +17,7 @@ router.post('/login',
 router.get('/users', 
   userController.getAllUsers,
   (req, res) => {
-    return res.status(200).json(res.locals.users);
+    return res.status(200).json(res.locals.allUsers);
   }
 );
 
