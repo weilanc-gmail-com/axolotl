@@ -14,8 +14,7 @@ module.exports = () => {
       historyApiFallback: true,
       contentBase: './client',
       proxy: {
-        context: ["/login"],
-        target: 'http://localhost:3000'
+        '/login': 'http://localhost:3000',
       }
     },
     output: {
