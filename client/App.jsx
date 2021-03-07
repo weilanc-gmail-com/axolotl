@@ -6,16 +6,13 @@ import NavBar from './components/NavBar.jsx';
 const App = () => {
   return (
       <div>
-        {/* <nav>
+        <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
             <li>
               <Link to="/login">Login</Link>
             </li>
           </ul>
-        </nav> */}
+        </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
