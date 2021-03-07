@@ -12,7 +12,7 @@ const path = require("path");
 const fetch = require('node-fetch');  // allows requests to be made in dev mode
 require("dotenv").config();
 
-const db = require('./routes/databaseRoutes');
+const dbRouter = require('./routes/databaseRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +28,8 @@ app.use(express.urlencoded());
  *
  * ************************************************************************
  */
+
+app.use('/db', dbRouter);
 
 // OAUTH LOGIN REQUEST
 
@@ -122,7 +124,7 @@ app.use((err, req, res, next) => {
     log: 'Express error handler caught unknown error',
     status: 500,
     message: { err: 'An error occurred' },
-  },
+  };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log('Error message: ', errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
