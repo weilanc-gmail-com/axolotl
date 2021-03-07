@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
 import regeneratorRuntime from "regenerator-runtime";
 
-
-
-
   const handleOAuth = async () => {
     try {
       const oAuthUrl = await fetch('/login', {
@@ -27,7 +24,5 @@ const Login = (props) => {
     </div>
   );
 };
-
-
 
 export default withRouter(Login);
