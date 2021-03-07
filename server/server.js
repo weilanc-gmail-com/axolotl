@@ -29,7 +29,7 @@ app.use(express.urlencoded());
  * ************************************************************************
  */
 
-app.use('/db', dbRouter);
+app.use('/users', dbRouter);
 
 // OAUTH LOGIN REQUEST
 

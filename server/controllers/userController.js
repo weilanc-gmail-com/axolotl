@@ -37,7 +37,8 @@ userController.checkUser = (req, res, next) => {
 // adds user to the database upon first OAuth
 userController.addUser = (req, res, next) => {
   
-  const userInfo = [`testUser${Math.floor(Math.random() * 100)}`, Math.floor(Math.random() * 100)]; // holds user info from github (token and username or something). should come from req.body 
+  // holds user info from github (token and username or something). should come from req.body 
+  const userInfo = [`testUser${Math.floor(Math.random() * 100)}`, Math.floor(Math.random() * 100)];  // test data
   // query statement
   const statement = `INSERT INTO people (username, token) VALUES($1, $2)`
   // make query into database
