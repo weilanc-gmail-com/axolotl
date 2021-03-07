@@ -3,13 +3,28 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-
 // handles requests to login
 router.post('/login', 
   userController.checkUser,
   userController.addUser,
   (req, res) => {
-    return res.status(200).redirect('/homepage-url');
+    return res.status(200).json(res.locals.user).redirect('/homepage-url');
+  }
+);
+
+// handles get requests for user profile
+router.get('/profile', 
+  userController.checkProfile,
+  (req, res) => {
+    return res.status(200).json(res.locals.profile).redirect('/matches-url');
+  }
+);
+
+// handles post request for new user profile
+router.post('/new-profile',
+  userController.addProfile,
+  (req, res) => {
+    return res.status(200).json(res.locals.profile).redirect('/matches-url');
   }
 );
 
@@ -17,7 +32,15 @@ router.post('/login',
 router.get('/users', 
   userController.getAllUsers,
   (req, res) => {
-    return res.status(200).json(res.locals.users);
+    return res.status(200).json(res.locals.allUsers);
+  }
+);
+
+// handles post requests to matches table
+router.post('/potential-matches',
+  userController.addPotential,
+  (req, res) => {
+    res.status(200);
   }
 );
 
