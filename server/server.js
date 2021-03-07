@@ -42,6 +42,10 @@ const client_secret = process.env.GH_CLIENT_SECRET
 
 
 
+// app.get('/login/home', (req, res) => {
+//   res.status(200).redirect('/login')
+// })
+
 //redirect to request Github acess this should probably be on client side
 app.get("/login", (req,res)=>{
   const url =`https://github.com/login/oauth/authorize?client_id=${client_id}`
@@ -51,7 +55,7 @@ app.get("/login", (req,res)=>{
 
 
 // //where github autoredirects giving us code
-app.get('/user/home', (req,res)=>{
+app.get('/login/home', (req,res)=>{
   const body ={
     client_id:client_id,
     client_secret:client_secret,
