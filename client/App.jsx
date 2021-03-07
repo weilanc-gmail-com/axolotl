@@ -8,7 +8,7 @@ import Matches from './pages/Matches.jsx';
 
 const App = () => {
   return (
-    <div>
+    <div className='mainContainer'>
       <NavBar />
         <Switch>
           <Route path='/login'>
@@ -24,6 +24,10 @@ const App = () => {
             <Home />
           </Route>
         </Switch>
+
+        <Link to='/login'>
+          <button>login</button>
+        </Link>
     </div>
   );
 }

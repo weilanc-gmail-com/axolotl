@@ -1,1 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "navbar";
+@import "colors";
+
+html {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $background-color;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+div{
+  max-width: 420px;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userCard {
+  margin: 5px;
+  padding: 10px;
+  background-color: $card-background-color;
+  border-radius: 5px;
+  border: 1px solid $light-border-color;
+
+  .cardContents {
+    box-shadow: 0px 0px 10px rgb(204, 203, 203);
+  }
+
+  .cardText {
+    padding: 10px;
+
+    h2{
+      color: $main-font-color;
+    }
+  }
+
+  .swipeBtns{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px 10px 10px 10px;
+
+    button {
+      box-shadow: 0px 0px 10px rgb(152, 152, 152);
+      border: 1px solid $light-border-color;
+      border-radius: 5px;
+      outline: none;
+      padding: 8px 10px;
+    }
+
+    .reject {
+      background-color: $deny-color;
+    }
+
+    .accept {
+      background-color: $accept-color;
+    }
+
+    i {
+      color: $light-border-color;
+      &:hover{
+        filter: blur(1px);
+      }
+    }
+  }
+}
+
+
+

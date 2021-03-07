@@ -1,23 +1,32 @@
+@import "colors";
+
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #555;
-  max-width: 1200px;
+  background-color: $card-background-color;
+  width: 100%;
+  min-width: 440px;
+  border-radius: 5px;
 
   a {
     text-align: center;
     padding: 16px 30px;
     transition: all 0.3s ease;
-    color: white;
+    color: $main-font-color;
     font-size: 16px;
 
     &:hover {
-      background-color: #000;
+      cursor: pointer;
+      filter: brightness(75%);
     }
   }
 
+  i:hover {
+    filter: blur(1px);
+  }
+
   .active {
-    background-color: #4CAF50;
+    background-color: $active-color;
   }
 }
