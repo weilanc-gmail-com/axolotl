@@ -9,25 +9,23 @@ import Matches from './pages/Matches.jsx';
 const App = () => {
   return (
     <div className='mainContainer'>
-      <NavBar />
       <Switch>
-        <Route path='/login'>
-          <Login />
+        <Route path='/home'>
+        <NavBar />
+          <Home />
         </Route>
         <Route path='/profile'>
+        <NavBar />
           <Profile styles={profileStyles} />
         </Route>
         <Route path='/matches'>
+        <NavBar />
           <Matches />
         </Route>
         <Route path='/'>
-          <Home />
+          <Login />
         </Route>
       </Switch>
-
-      <Link to='/login'>
-        <button>login</button>
-      </Link>
     </div>
   );
 };
