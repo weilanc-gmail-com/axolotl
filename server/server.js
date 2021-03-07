@@ -13,7 +13,7 @@ const fetch = require('node-fetch');  // allows requests to be made in dev mode
 const cors = require('cors');
 require("dotenv").config();
 
-const db = require('./routes/databaseRoutes');
+const dbRouter = require('./routes/databaseRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -30,6 +30,8 @@ app.use(express.urlencoded());
  *
  * ************************************************************************
  */
+
+app.use('/users', dbRouter);
 
 // OAUTH LOGIN REQUEST
 
