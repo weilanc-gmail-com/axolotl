@@ -1,28 +1,28 @@
 import React, { useReducer, useState} from 'react';
 const Profile = () => {
   return (
-    <div className='wrapper' style={{ padding: '5px 20px'}} >
+    <div className='profile'>
     <h2>Profile Information</h2>
     <form>
-    <fieldset style={{margin: '20px 0', borderRadius: '10px'}}>
+    <fieldset>
        <label>
          <p>Name</p>
-         <input name='userName' style={{borderRadius: '10px'}} />
+         <input name='userName' />
        </label>
      </fieldset>
-     <fieldset style={{margin: '20px 0', height: '200px', borderRadius: '10px'}}>
+     <fieldset className="tallFieldSet">
      <label>
          <p>What do you want to work on?</p>
-         <input name='userInterest' style={{height: '100px', width: '500px', borderRadius: '10px'}} />
+         <input className="bigInput" name='userInterest' />
        </label>
      </fieldset>
-     <fieldset style={{margin: '20px 0', height: '200px', borderRadius: '10px'}}>
+     <fieldset className="tallFieldSet">
      <label>
          <p>Interests:</p>
-         <input name='userInterest' style={{height: '100px', width: '500px', borderRadius: '10px'}} />
+         <input className="bigInput" name='userInterest' />
        </label>
      </fieldset>
-     <button type='submit' style={{margin: '0 auto', display:'block', height: '30px', width: '100px', borderRadius: '10px'}}>Submit</button>
+     <button type='submit' >Submit</button>
     </form>
   </div>
   );

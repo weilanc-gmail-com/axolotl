@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import Login from './pages/login.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -10,27 +10,27 @@ const App = () => {
   return (
     <div className='mainContainer'>
       <NavBar />
-        <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/profile'>
-            <Profile styles = {profileStyles}  />
-          </Route>
-          <Route path='/matches'>
-            <Matches />
-          </Route>
-          <Route path='/'>
-            <Home />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/profile'>
+          <Profile styles={profileStyles} />
+        </Route>
+        <Route path='/matches'>
+          <Matches />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+      </Switch>
 
-        <Link to='/login'>
-          <button>login</button>
-        </Link>
+      <Link to='/login'>
+        <button>login</button>
+      </Link>
     </div>
   );
-}
+};
 
 // function Home() {
 //   return <h2>Home</h2>;
@@ -49,6 +49,6 @@ const App = () => {
 
 const profileStyles = {
   padding: '5px 20px',
-}
+};
 
 export default withRouter(App);
