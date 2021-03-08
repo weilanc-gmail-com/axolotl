@@ -1,4 +1,3 @@
-
 /**
  * ************************************************************************
  *
@@ -8,23 +7,19 @@
  */
 
 const express = require("express");
-const path = require("path");``
+const path = require("path");
 const fetch = require('node-fetch');  // allows requests to be made in dev mode
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require("dotenv").config();
 
-<<<<<<< HEAD
-const db = require('./routes/databaseRoutes');
-const { useParams } = require("react-router");
-const { ConsoleMessage } = require("puppeteer");
-=======
 const dbRouter = require('./routes/databaseRoutes');
->>>>>>> 446daabce449cd69a18ec3a8d1f21349b34e0429
 
 const app = express();
 const PORT = 3000;
 
 // parses incoming request bodies
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
@@ -55,15 +50,23 @@ const client_secret = process.env.GH_CLIENT_SECRET
 // })
 
 //redirect to request Github acess this should probably be on client side
+app.get("/login", (req,res)=>{
+  const url =`https://github.com/login/oauth/authorize?client_id=${client_id}`
+  res.cookie('logging_in');
+  res.status(200).json(url);
+})
 
-app.get('/user/home', (req,res)=>{
+
+
+// //where github autoredirects giving us code
+app.get('/login/home', (req,res)=>{
   const body ={
     client_id:client_id,
     client_secret:client_secret,
     code: req.query.code
   }
  
-console.log(req.query.code)
+console.log('CODE: ', req.query.code)
   //  getAccessToken(code)or
 fetch('https://github.com/login/oauth/access_token',{
     method:"POST",
@@ -78,111 +81,12 @@ fetch('https://github.com/login/oauth/access_token',{
   }).then(response => response.text())
     .then(data => new URLSearchParams(data))
     .then(params => {
-<<<<<<< HEAD
-      console.log(params);
-    })
-
-=======
       console.log('ACCESS_TOKEN: ', params.get('access_token'));
       return res.status(200).json(params.get('access_token'));
     })
     // res.redirect('/home');
     
->>>>>>> ee8b402138add38d9b2b5c482ae57aeca4ab4bc9
 })
-
-// app.get("/login", (req,res)=>{
-//   const url =`https://github.com/login/oauth/authorize?client_id=${client_id}`
-//   res.status(200).json(url);
-// })
-
-// function getGitUser(access_token){
-//   fetch('https://api.github.com/user', {
-//     headers:{
-//       Authorization: `bearer ${access_token}`
-//     }
-//   })}
-// // //where github autoredirects giving us code
-// app.get('/login/home', (req,res)=>{
-//   const body ={
-//     client_id:client_id,
-//     client_secret:client_secret,
-//     code: req.query.code
-//   }
-
-
- 
-// console.log('CODE: ', req.query.code)
-//   //  getAccessToken(code)or
-// fetch('https://github.com/login/oauth/access_token&scope=user%20repo_deployment%20user:follow%20user:email%20read:user'
-
-// ,{
-//     method:"POST",
-//     headers:{
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       client_id: client_id,
-//       client_secret: client_secret,
-//       code: req.query.code
-//     })
-//   }).then(response => response.text())
-//     .then(data => {
-//     const hi=  new URLSearchParams(data)
-//     const info = hi.toString()
-//    console.log(info, "i want info") 
-//      const access_token = hi.get('access_token')
-//     console.log(access_token)
-//      fetch('https://api.github.com/user', {
-//           headers:{
-//             Authorization: `bearer ${access_token}`
-//           }}).then(data)
-   
-//     }).then((data)=>{
-//      // const userData = getGitUser(access_token)
-//      console.log(data, 'ddaaaataaaaaa')
-//       // function getGitUser(access_token){
-//       //   fetch('https://api.github.com/user', {
-//       //     headers:{
-//       //       Authorization: `bearer ${access_token}`
-//       //     }
-          
-//         })
-      
-    
-
-   
-   
-//     // })
-//     res.redirect('/home');
-// })
-
-
-// getGitUser(access_token){
-//   fetch('https://api.github.com/user', {
-//     headers:{
-//       Authorization: `bearer ${access_token}`
-//     }
-//   }).then((data)=>{req.json()
-//   return data})
-// };
-
-
-
-//   if(!code){
-//     return res.send({
-//       message:"please try again"
-//     })
-//   }
-//   console.log("login redirect?????")
-//   req.post(  )
-//   .send({
-
-//   })
-// }
-
-//https://github.com/settings/connections/applications/:client_id
-//client ID 5c3312c7f96f4983b9c7
 
 
 /**
