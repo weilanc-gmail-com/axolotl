@@ -1,4 +1,5 @@
 import React, { useReducer, useState, useEffect} from 'react';
+import { withRouter } from 'react-router-dom';
 import fetch from "isomorphic-fetch";
 import regeneratorRuntime from 'regenerator-runtime';
 
@@ -11,6 +12,9 @@ const formReducer = (state, event) => {
 }
 
 const Profile = (props) => {
+  console.log(props);
+  if(props.user === undefined) props.history.push('/');
+
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
 
@@ -110,7 +114,7 @@ const handleChange = event => {
   </div>
   );
 };
-export default Profile;
+export default withRouter(Profile);
 
 
 
