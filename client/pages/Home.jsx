@@ -5,7 +5,10 @@ import fetch from 'isomorphic-fetch';
 import regeneratorRuntime from "regenerator-runtime";
 
 //Functional Component
-const Home = () => {
+const Home = (props) => {
+  const { user } = props;
+
+  // if(!user) props.history.push('/');
 
   const user1 = {
     username: 'rcaporino',
@@ -58,7 +61,7 @@ const Home = () => {
     console.log(potentialMatches);
     setCurrPotMatch(curr => curr = nextPotMatch);
   }
-
+  console.log('USER: ', user);
   return (
     <UserCard currPotMatch={currPotMatch} handleSwipe={handleSwipe}/>
   );

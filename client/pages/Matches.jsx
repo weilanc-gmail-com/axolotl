@@ -7,13 +7,13 @@ const Matches = (props) => {
 
   useEffect(() => {
     //grab info with fetch request
-    // fetch('/matches').then(data=>{
-    //   console.log(data, "jjkjkj")
-    //   return data.text()
-    // }).then(data=>{
-    //   console.log(data, "info???")
-    // })
-  });
+    fetch('/matches').then(data=>{
+      console.log(data, "jjkjkj")
+      return data.json()
+    }).then(data=>{
+      console.log(data, "info???")
+    })
+  }, []);
 
   //grid of cards
 

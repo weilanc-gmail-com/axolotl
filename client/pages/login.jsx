@@ -17,18 +17,17 @@ const handleOAuth = async () => {
 };
 
 const Login = React.memo((props) => {
-  const { handleSetUser } = props;
-  let token = "";
+  const { handleSetUser} = props;
+  let token = '';
   const { search } = useLocation();
   const code = search;
 
   const getToken = async (code) => {
-    try {
-      document.cookie =
-        "logging_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    try{
+      document.cookie = "logging_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       const serverResponse = await fetch(`/login/home${code}`);
       token = await serverResponse.json();
-      console.log("Token: ", await token);
+      console.log('Token: ', await token);
 
       const getUser = await fetch(`https://api.github.com/user`, {
         headers: {
@@ -36,6 +35,8 @@ const Login = React.memo((props) => {
         },
       });
       const userResponse = await getUser.json();
+
+      handleSetUser( await userResponse.login);
 
       handleSetUser(await userResponse.login);
 
@@ -45,9 +46,9 @@ const Login = React.memo((props) => {
     }
   };
 
-  const cookies = document.cookie.split("=");
-  console.log(cookies.includes("logging_in"));
-  if (code && cookies.includes("logging_in")) {
+  const cookies = document.cookie.split('=');
+  console.log(cookies.includes('logging_in'));
+  if(code && cookies.includes('logging_in')) {
     getToken(code);
   }
 

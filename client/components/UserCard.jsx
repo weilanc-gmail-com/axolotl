@@ -23,6 +23,7 @@ const UserCard = (props) => {
         <img src={currPotMatch.user_profile.img} alt='profile pic' />
         <div className='cardText'>
           <h2>{currPotMatch.username}</h2>
+          <hr/>
           <p>
             <strong>Wants to study: </strong>
             {currPotMatch.user_profile.skills_to_improve}
