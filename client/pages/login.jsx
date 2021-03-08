@@ -35,6 +35,13 @@ const Login = React.memo((props) => {
         }
       })
       const userResponse = await getUser.json();
+      console.log(await userResponse);
+      const avatar = {
+        avatar: await userResponse.avatar_url,
+        profileLink: await userResponse.html_url
+      }
+
+      
 
       handleSetUser( await userResponse.login);
 

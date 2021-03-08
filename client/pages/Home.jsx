@@ -8,7 +8,7 @@ import regeneratorRuntime from "regenerator-runtime";
 const Home = (props) => {
   const { user } = props;
 
-  // if(!user) props.history.push('/');
+  if(!user) props.history.push('/');
 
   const user1 = {
     username: 'rcaporino',
