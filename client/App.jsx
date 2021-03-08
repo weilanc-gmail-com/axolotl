@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import Login from './pages/login.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -7,23 +7,29 @@ import Profile from './pages/Profile.jsx';
 import Matches from './pages/Matches.jsx';
 
 const App = () => {
+  const [user, setUser] = useState('');
+
+  const handleSetUser = (username) => {
+    setUser(username);
+  };
+
   return (
     <div className='mainContainer'>
       <Switch>
         <Route path='/home'>
-        <NavBar />
-          <Home />
+          <NavBar />
+          <Home user={user} />
         </Route>
         <Route path='/profile'>
-        <NavBar />
-          <Profile styles={profileStyles} />
+          <NavBar />
+          <Profile user={user} />
         </Route>
         <Route path='/matches'>
-        <NavBar />
-          <Matches />
+          <NavBar />
+          <Matches user={user} />
         </Route>
         <Route path='/'>
-          <Login />
+          <Login handleSetUser={handleSetUser} />
         </Route>
       </Switch>
     </div>
