@@ -71,6 +71,12 @@ div{
     padding: 10px;
     box-shadow: inset 0px 0px 10px rgb(204, 203, 203);
 
+    hr {
+      height: 1px;
+      border: none;
+      background-color: $light-border-color;
+    }
+
     h2{
       color: $main-font-color;
     }
