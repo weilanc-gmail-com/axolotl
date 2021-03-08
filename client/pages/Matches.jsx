@@ -1,32 +1,28 @@
 //import React from 'react';
-import React, { useReducer, useState} from 'react';
-import fetch from "isomorphic-fetch"
+import React, { useEffect, useReducer, useState } from "react";
+import fetch from "isomorphic-fetch";
 //Functional Component
 const Matches = (props) => {
-  const { user }= props
+  const { user } = props;
 
-  //grab info with fetch request
+  useEffect(() => {
+    //grab info with fetch request
+    // fetch('/matches').then(data=>{
+    //   console.log(data, "jjkjkj")
+    //   return data.text()
+    // }).then(data=>{
+    //   console.log(data, "info???")
+    // })
+  });
 
-
-  //did mount to load matches
   //grid of cards
 
-  console.log(props.user)
+  //console.log(props.user, "props.iser")
   return (
-  
-    // <div>
-    //   <h3>Welcome to Pairer!</h3>
-    //   <small>Main Page</small>
-    // </div>
-
-<div>
-<h2>Your Matches</h2>
-</div>
+    <div className='mainContainer'>
+      <h2>Your Matches</h2>
+      <div className='matches'>{/* card s */}</div>
+    </div>
   );
 };
 export default Matches;
-
-//display everyone connected the person is connected with
-//need fetch request to database
-//take components in homepage
-//matches in grids of square

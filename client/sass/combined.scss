@@ -27,7 +27,27 @@ body{
 div{
   max-width: 420px;
 }
-
+.matches{
+  margin: 5px;
+  padding: 10px;
+ border-color: $card-background-color;
+  border-radius: 5px;
+  border: 10px solid $card-background-color;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+ 
+}
+.matchesContainer{
+  display:flex;
+  flex-direction:row;
+}
+.divcolor{
+  background-color:$card-background-color ;
+}
 .mainContainer {
   display: flex;
   flex-direction: column;
