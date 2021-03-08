@@ -27,8 +27,10 @@ CREATE TABLE public.matches (
 );
 
 CREATE TABLE public.potentials (
-  _id serial PRIMARY KEY NOT NULL,
-  potential_match integer
+  _id integer,
+  username varchar, 
+  potential_matches_id integer,
+  potential_matches_username varchar
 );
 
 ALTER TABLE public.people ADD CONSTRAINT "people_fk0" FOREIGN KEY (matches) REFERENCES public.matches(_id);
