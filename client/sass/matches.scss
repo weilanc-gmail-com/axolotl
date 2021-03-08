@@ -1,0 +1,48 @@
+.matches{
+    margin: 5px;
+    padding: 10px;
+    border-color: $card-background-color;
+    border-radius: 5px;
+    border: 10px solid $card-background-color;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+   
+  }
+
+  .matchesContainer{
+    display:flex;
+    flex-direction:row;
+  }
+  .divcolor{
+    background-color:$card-background-color ;
+  }
+  .rounded {
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+  }
+
+  .profile-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .matches-container {
+    width: 70vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  
+  .profile-card {
+    margin: 10px;
+  }
+  

@@ -3,6 +3,11 @@
 @import "colors";
 @import "profile";
 @import "login";
+@import "profile";
+@import "profilecard";
+@import "profilepicture";
+@import "matches";
+
 
 #root{
   min-height: 889px;
@@ -65,6 +70,10 @@ div{
 
   .cardContents {
     box-shadow: 0px 0px 10px rgb(204, 203, 203);
+    img {
+      height: 420px;
+      width: 420px;
+    }
   }
 
   .cardText {
