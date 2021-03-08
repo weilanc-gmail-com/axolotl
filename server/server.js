@@ -63,7 +63,6 @@ app.get('/login/home', (req,res)=>{
     client_secret:client_secret,
     code: req.query.code
   }
-
  
 console.log('CODE: ', req.query.code)
   //  getAccessToken(code)or
@@ -80,9 +79,11 @@ fetch('https://github.com/login/oauth/access_token',{
   }).then(response => response.text())
     .then(data => new URLSearchParams(data))
     .then(params => {
-      console.log('ACCESS_TOKEN: ', params);
+      console.log('ACCESS_TOKEN: ', params.get('access_token'));
+      return res.status(200).json(params.get('access_token'));
     })
-    res.redirect('/home');
+    // res.redirect('/home');
+    
 })
 
 

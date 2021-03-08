@@ -15,6 +15,7 @@ module.exports = () => {
       contentBase: './client',
       proxy: {
         '/login': 'http://localhost:3000',
+        '/login/home': 'http://localhost:3000',
         '/users/login': 'http://localhost:3000',
         '/users/profile': 'http://localhost:3000',
         '/users/new-profile': 'http://localhost:3000',
