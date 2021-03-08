@@ -1,4 +1,5 @@
 import React, { useReducer, useState, useEffect} from 'react';
+import { withRouter } from 'react-router-dom';
 import fetch from "isomorphic-fetch";
 import regeneratorRuntime from 'regenerator-runtime';
 
@@ -113,7 +114,7 @@ const handleChange = event => {
   </div>
   );
 };
-export default Profile;
+export default withRouter(Profile);
 
 
 
