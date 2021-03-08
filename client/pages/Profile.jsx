@@ -12,8 +12,8 @@ const formReducer = (state, event) => {
 }
 
 const Profile = (props) => {
-
-  if(props.username === undefined) props.history.push('/');
+  console.log(props);
+  if(props.user === undefined) props.history.push('/');
 
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
