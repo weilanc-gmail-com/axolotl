@@ -1,0 +1,28 @@
+.profile-card-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #021a40;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 500px;
+    max-height: 200px;
+    overflow: hidden;
+  }
+  .profile-card-pic {
+    --imageSize: 100px;
+    width: var(--imageSize);
+    height: var(--imageSize);
+  }
+  .profile-card-copy {
+    margin-left: 10px;
+  }
+  
+  h3 {
+    margin-top: 0;
+  }
+  p {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

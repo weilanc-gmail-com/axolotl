@@ -182,15 +182,6 @@ userController.filterMatches = (req, res, next) => {
 
 };
 
-userController.addMatches = (req, res, next) => {
-
-
-};
-
-userController.deleteMatches = (req, res, next) => {
-
-};
-
 
 
 module.exports = userController;

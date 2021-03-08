@@ -21,7 +21,7 @@ const UserCard = (props) => {
       }}
     >
       <div className='cardContents'>
-        <img src={currPotMatch.github_user_info ? currPotMatch.github_user_info.avatar : ''} alt='profile pic' />
+        <img src={currPotMatch.github_user_info ? currPotMatch.github_user_info.avatar : `https://github.com/${currPotMatch.username}.png`} alt='profile pic' />
         <div className='cardText'>
           <h2>{currPotMatch.username}</h2>
           <hr/>
