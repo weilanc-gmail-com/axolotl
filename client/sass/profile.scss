@@ -2,8 +2,23 @@
   padding: 5px 20px;
 
   fieldset {
+    min-width: 400px;
     margin: 20px 0px;
+    border: 1px solid $light-border-color;
     border-radius: 10px;
+    background-color: $card-background-color;
+  }
+
+  input {
+    outline: none;
+    border: 1px solid $light-border-color;
+  }
+
+  textarea {
+    resize: vertical;
+    max-width: 390px;
+    border: 1px solid $light-border-color;
+    border-radius: 5px;
   }
   
   .tallFieldSet {
@@ -24,7 +39,16 @@
     display: block;
     height: 30px;
     width: 100px; 
-    border-radius: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid $light-border-color;
+    background-color: $accept-color;
+    color: $light-border-color;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(75%);
+    }
   }
 
 }
