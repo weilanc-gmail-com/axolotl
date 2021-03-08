@@ -2,8 +2,6 @@
 
 Client info should be kept in local .env to keep it secret
 
-client secret: 333853046c94fbc7a879684589f370475146357e
-client id: 5c3312c7f96f4983b9c7
 
 2 rediredts: 
 1. /login/github

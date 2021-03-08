@@ -32,7 +32,8 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "sass": "^1.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
@@ -42,7 +43,6 @@
     "css-loader": "^5.1.1",
     "nodemon": "^2.0.7",
     "redux-devtools-extension": "^2.13.8",
-    "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.24.3",
