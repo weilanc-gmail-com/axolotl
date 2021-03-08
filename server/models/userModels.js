@@ -10,7 +10,7 @@ const pool = new Pool({
 // exports an object with a method on it that makes queries to database
 module.exports = {
   query: (text, params, callback) => {
-    console.log('Querying for: ', text);
+    // console.log('Querying for: ', text);
     return pool.query(text, params, callback);
   }
 };
