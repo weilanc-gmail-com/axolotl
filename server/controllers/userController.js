@@ -39,7 +39,8 @@ userController.addUser = (req, res, next) => {
   // github username and token should be available on req.body
   // mock data for now 
   // const userInfo = [`testUser${Math.floor(Math.random() * 100)}`, Math.floor(Math.random() * 100)];
-  const userInfo = [req.body.username, req.body.token, req.body.githubUserInfo];
+  const userInfo = [req.body.username, req.body.token, JSON.stringify(req.body.githubUserInfo)];
+  console.log(userInfo);
   const statement = `INSERT INTO people (username, token, github_user_info) VALUES($1, $2, $3) RETURNING *`;
   
   db.query(statement, userInfo, (err, result) => {
@@ -109,7 +110,7 @@ userController.addProfile = (req, res, next) => {
 // gets all users to display on swipe screen: TESTED 3/7 5:30PM
 userController.getAllUsers = (req, res, next) => {
 
-  const statement = `SELECT _id, username, user_profile FROM people`;
+  const statement = `SELECT _id, username, user_profile, github_user_info FROM people`;
   
   db.query(statement, (err, result) => {
     if (err) {
@@ -134,7 +135,7 @@ userController.getAllUsers = (req, res, next) => {
 
 // inserts pair into potentials table
 userController.addPotential = (req, res, next) => {
-
+  console.log(req.body);
   const potentialPair = [req.body.userId, req.body.username, req.body.potentialMatchId, req.body.potentialMatchUsername]; // req.body.userId is people._id of user, req.body.potentialMatchId is people._id of potential match
   const statement = `INSERT INTO potentials (_id, username, potential_matches_id, potential_matches_username) VALUES($1, $2, $3, $4) RETURNING *`;
 

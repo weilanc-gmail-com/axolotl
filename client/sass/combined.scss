@@ -61,6 +61,7 @@ div{
   background-color: $card-background-color;
   border-radius: 5px;
   border: 1px solid $light-border-color;
+  min-width: 420px;
 
   .cardContents {
     box-shadow: 0px 0px 10px rgb(204, 203, 203);
