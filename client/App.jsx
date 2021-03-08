@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import Login from './pages/login.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -6,31 +6,36 @@ import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
 import Matches from './pages/Matches.jsx';
 
-const App = () => {
+const App = React.memo(() => {
+  const [user, setUser] = useState('');
+  console.log('APP');
+
+  const handleSetUser = (username) => {
+    setUser((prevUsername)=> prevUsername = username);
+  };
+
   return (
     <div className='mainContainer'>
-      <NavBar />
       <Switch>
-        <Route path='/login'>
-          <Login />
+        <Route path='/home'>
+          <NavBar />
+          <Home user={user} />
         </Route>
         <Route path='/profile'>
-          <Profile styles={profileStyles} />
+          <NavBar />
+          <Profile user={user} />
         </Route>
         <Route path='/matches'>
-          <Matches />
+          <NavBar />
+          <Matches user={user} />
         </Route>
         <Route path='/'>
-          <Home />
+          <Login handleSetUser={handleSetUser} user={user}/>
         </Route>
       </Switch>
-
-      <Link to='/login'>
-        <button>login</button>
-      </Link>
     </div>
   );
-};
+});
 
 // function Home() {
 //   return <h2>Home</h2>;

@@ -2,6 +2,7 @@
 @import "navbar";
 @import "colors";
 @import "profile";
+@import "login";
 
 #root{
   min-height: 889px;
@@ -66,7 +67,15 @@ div{
   }
 
   .cardText {
+    margin: 10px;
     padding: 10px;
+    box-shadow: inset 0px 0px 10px rgb(204, 203, 203);
+
+    hr {
+      height: 1px;
+      border: none;
+      background-color: $light-border-color;
+    }
 
     h2{
       color: $main-font-color;
@@ -80,12 +89,16 @@ div{
     padding: 0px 10px 10px 10px;
 
     button {
-      box-shadow: 0px 0px 10px rgb(152, 152, 152);
+      box-shadow: 0px 0px 10px rgb(91, 91, 91);
       border: 1px solid $light-border-color;
       border-radius: 5px;
       outline: none;
       padding: 8px 10px;
-      cursor: pointer
+      cursor: pointer;
+
+      &:hover{
+        box-shadow: 0px 0px 20px rgb(91, 91, 91);
+      }
     }
 
     .reject {
