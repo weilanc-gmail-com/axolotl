@@ -7,10 +7,10 @@ const db = require('../models/userModels');
 const userController = {};
 
 
-// checks the database for the user
+// checks the database for the user: TESTED 3/7 5PM
 userController.checkUser = (req, res, next) => {
   const username = [req.body.username]; // save Github username on req.body
-  const statement = `SELECT _id, username, user_profile FROM people WHERE username = $1`
+  const statement = `SELECT _id, username, user_profile, github_user_info FROM people WHERE username = $1`
 
   db.query(statement, username, (err, result) => {
     if (err) {
@@ -27,19 +27,20 @@ userController.checkUser = (req, res, next) => {
       } else { // if the user is in the database, send back user information and rediret to home page
         res.locals.user = result.rows[0];
         console.log('User exists in the database. Redirecting to home page.');
-        return res.status(200).json(res.locals.user).redirect('/homepage-url'); // is this allowed??? reroutes to home page somehow 
+        return res.status(200).json(res.locals.user)//.redirect('/homepage-url'); // is this allowed??? reroutes to home page somehow 
       }
     }
   });
 };
 
-// adds user to the database upon first OAuth
+// adds user to the database upon first OAuth: TESTED 3/7 5PM
 userController.addUser = (req, res, next) => {
   
   // github username and token should be available on req.body
   // mock data for now 
-  const userInfo = [`testUser${Math.floor(Math.random() * 100)}`, Math.floor(Math.random() * 100)];
-  const statement = `INSERT INTO people (username, token) VALUES($1, $2) RETURNING *`;
+  // const userInfo = [`testUser${Math.floor(Math.random() * 100)}`, Math.floor(Math.random() * 100)];
+  const userInfo = [req.body.username, req.body.token, req.body.githubUserInfo];
+  const statement = `INSERT INTO people (username, token, github_user_info) VALUES($1, $2, $3) RETURNING *`;
   
   db.query(statement, userInfo, (err, result) => {
     if (err) {
@@ -59,7 +60,7 @@ userController.addUser = (req, res, next) => {
 
 };
 
-// checks if user has a profile in the database 
+// checks if user has a profile in the database: TESTED 3/7 5PM
 userController.checkProfile = (req, res, next) => {
 
   const username = [req.body.username];
@@ -74,7 +75,7 @@ userController.checkProfile = (req, res, next) => {
         }
       });
     } else {
-      // if the user doesn't have a profile set up, res.locals.profile will be empty and the user info page should display nothing. otherwise, user info page should display data on res.locals.profile
+      // if the user doesn't have a profile set up, res.locals.profile will be empty and the user info page will display nothing. otherwise, user info page should display data on res.locals.profile
       res.locals.profile = result.rows[0];
       console.log('User profile found.');
       return next();
@@ -82,11 +83,11 @@ userController.checkProfile = (req, res, next) => {
   });
 };
 
-// adds user profile to the database
+// adds user profile to the database: TESTED 3/7 5:30PM
 userController.addProfile = (req, res, next) => {
 
-  const profile = [req.body.profile, req.body.username];
-  const statement = `UPDATE people SET user_profile = $1 WHERE username = $2 RETURNING *`;
+  const profile = [req.body.profile, req.body.username]; // profile must be JSON object
+  const statement = `UPDATE people SET user_profile = $1 WHERE username = $2 RETURNING user_profile`;
 
   db.query(statement, profile, (err, result) => {
     if (err) {
@@ -97,14 +98,15 @@ userController.addProfile = (req, res, next) => {
         }
       });
     } else {
-      res.locals.profile = response.rows[0];
+      res.locals.profile = result.rows[0];
       console.log('User profile added to the database.');
+      console.log(result.rows[0]);
       return next();
     }
   });
 };
 
-// gets all users to display on swipe screen
+// gets all users to display on swipe screen: TESTED 3/7 5:30PM
 userController.getAllUsers = (req, res, next) => {
 
   const statement = `SELECT _id, username, user_profile FROM people`;
@@ -118,8 +120,8 @@ userController.getAllUsers = (req, res, next) => {
         }
       });
     } else {
-      if (!res.locals.allUsers) {
-        return res.status(400).json( {err: 'The query for all users returned nothing.'} );
+      if (!result.rows.length) {
+        return res.status(400).json( {err: 'There are no users in the database.'} );
       } else {
         res.locals.allUsers = result.rows;
         console.log('Returning all users to the swipe screen.');
@@ -133,8 +135,8 @@ userController.getAllUsers = (req, res, next) => {
 // inserts pair into potentials table
 userController.addPotential = (req, res, next) => {
 
-  const potentialPair = [req.body.user, req.body.potentialMatch]; // req.body.user is people._id of user, req.body.potentialMatch is people._id of potential match
-  const statement = ``;
+  const potentialPair = [req.body.userId, req.body.username, req.body.potentialMatchId, req.body.potentialMatchUsername]; // req.body.userId is people._id of user, req.body.potentialMatchId is people._id of potential match
+  const statement = `INSERT INTO potentials (_id, username, potential_matches_id, potential_matches_username) VALUES($1, $2, $3, $4) RETURNING *`;
 
   db.query(statement, potentialPair, (err, result) => {
     if (err) {
@@ -147,21 +149,18 @@ userController.addPotential = (req, res, next) => {
     } else {
       console.log(`Potential pair was successfully added to 'Potentials' table.`);
       return next(); // should also remove from allUsers list for current user -> stretch?
-    }
-  })
+    };
+  });
 
 };
 
-// gets a user's matches to display on matches screen 
-userController.getMatches = (req, res, next) => {
+// returns user's matches. need to be filtered from allUsers on state 
+userController.filterMatches = (req, res, next) => {
 
-  const statement = `SELECT match 
-                      FROM people 
-                      LEFT JOIN matches 
-                      ON people._id = matches._id 
-                      WHERE matches._id = people._id`; // straight bs this definitely does not work
+  const user = [req.body.userId];
+  const statement = `SELECT potential_matches_id, potential_matches_username FROM potentials WHERE _id = $1`;
 
-  db.query(statement, (err, result) => {
+  db.query(statement, user, (err, result) => {
     if (err) {
       return next({
         log: 'There was an error with the getMatches query.',
@@ -170,11 +169,11 @@ userController.getMatches = (req, res, next) => {
         }
       });
     } else {
-      if (!res.locals.matches) {
-        return res.status(400).json( {err: 'The query for all matches returned nothing.'} );
+      if (!result.rows.length) {
+        return res.status(400).json( {err: 'The query to filter matches returned nothing.'} );
       } else {
-        res.locals.matches = result.rows;
-        console.log('Returning all matches to the matches screen.');
+        res.locals.filteredMatches = result.rows;
+        console.log('Returning filtered matches.');
         return next();
       };
     };
@@ -182,6 +181,14 @@ userController.getMatches = (req, res, next) => {
 
 };
 
+userController.addMatches = (req, res, next) => {
+
+
+};
+
+userController.deleteMatches = (req, res, next) => {
+
+};
 
 
 
