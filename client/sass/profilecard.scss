@@ -1,7 +1,9 @@
 .profile-card-container {
     display: flex;
     flex-direction: row;
-    border: 1px solid #021a40;
+    border: 1px solid $light-border-color;
+    background-color: $card-background-color;
+    box-shadow: 0px 0px 10px rgb(170, 170, 170);
     border-radius: 10px;
     padding: 10px;
     max-width: 500px;
