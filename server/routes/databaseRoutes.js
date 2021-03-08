@@ -8,7 +8,7 @@ router.post('/login',
   userController.checkUser,
   userController.addUser,
   (req, res) => {
-    return res.status(200).json(res.locals.user).redirect('/homepage-url');
+    return res.status(200).json(res.locals.user)//.redirect('/homepage-url');
   }
 );
 
@@ -16,15 +16,15 @@ router.post('/login',
 router.get('/profile', 
   userController.checkProfile,
   (req, res) => {
-    return res.status(200).json(res.locals.profile).redirect('/matches-url');
+    return res.status(200).json(res.locals.profile)//.redirect('/matches-url');
   }
 );
 
-// handles post request for new user profile
+// handles post request to create/edit user profile
 router.post('/new-profile',
   userController.addProfile,
   (req, res) => {
-    return res.status(200).json(res.locals.profile).redirect('/matches-url');
+    return res.status(200).json(res.locals.profile)//.redirect('/matches-url');
   }
 );
 
@@ -46,7 +46,9 @@ router.post('/potential-matches',
 
 // handles requests to get all matches
 router.get('/matches',
-  userController.getMatches,
+  userController.filterMatches,
+  userController.addMatches,
+  userController.deleteMatches,
   (req, res) => {
     return res.status(200).json(res.locals.matches);
   }
