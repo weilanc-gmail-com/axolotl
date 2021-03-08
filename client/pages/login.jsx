@@ -16,17 +16,18 @@ const handleOAuth = async () => {
   }
 };
 
-const Login = (props) => {
-  const { handleSetUser } = props;
-  let token = ''
+const Login = React.memo((props) => {
+  const { handleSetUser} = props;
+  let token = '';
   const { search } = useLocation();
   const code = search;
   
   const getToken = async (code) => {
     try{
+      document.cookie = "logging_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       const serverResponse = await fetch(`/login/home${code}`);
       token = await serverResponse.json();
-      console.log(await token);
+      console.log('Token: ', await token);
 
       const getUser = await fetch(`https://api.github.com/user`, {
         headers: {
@@ -34,7 +35,8 @@ const Login = (props) => {
         }
       })
       const userResponse = await getUser.json();
-      console.log(await userResponse);
+
+      handleSetUser( await userResponse.login);
 
       props.history.push('/home');
 
@@ -44,7 +46,11 @@ const Login = (props) => {
     }
   }
 
-  if(code) getToken(code);
+  const cookies = document.cookie.split('=');
+  console.log(cookies.includes('logging_in'));
+  if(code && cookies.includes('logging_in')) {
+    getToken(code);
+  }
 
   return (
     <div className='mainContainer'>
@@ -57,6 +63,6 @@ const Login = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default withRouter(Login);

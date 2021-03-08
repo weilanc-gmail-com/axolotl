@@ -6,11 +6,12 @@ import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
 import Matches from './pages/Matches.jsx';
 
-const App = () => {
+const App = React.memo(() => {
   const [user, setUser] = useState('');
+  console.log('APP');
 
   const handleSetUser = (username) => {
-    setUser(username);
+    setUser((prevUsername)=> prevUsername = username);
   };
 
   return (
@@ -29,12 +30,12 @@ const App = () => {
           <Matches user={user} />
         </Route>
         <Route path='/'>
-          <Login handleSetUser={handleSetUser} />
+          <Login handleSetUser={handleSetUser} user={user}/>
         </Route>
       </Switch>
     </div>
   );
-};
+});
 
 // function Home() {
 //   return <h2>Home</h2>;
