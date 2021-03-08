@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const UserCard = (props) => {
   const { currPotMatch, handleSwipe } = props;
@@ -10,6 +10,7 @@ const UserCard = (props) => {
     else setCardClass('userCard slide-out-right');
   };
 
+
   return (
     <div
       className={cardClass}
@@ -20,17 +21,17 @@ const UserCard = (props) => {
       }}
     >
       <div className='cardContents'>
-        <img src={currPotMatch.user_profile.img} alt='profile pic' />
+        <img src={currPotMatch.github_user_info ? currPotMatch.github_user_info.avatar : ''} alt='profile pic' />
         <div className='cardText'>
           <h2>{currPotMatch.username}</h2>
           <hr/>
           <p>
             <strong>Wants to study: </strong>
-            {currPotMatch.user_profile.skills_to_improve}
+            {currPotMatch.user_profile ? currPotMatch.user_profile.skills_to_improve : 'No skills to improve.'}
           </p>
           <p>
             <strong>Interests: </strong>
-            {currPotMatch.user_profile.interests}
+            {currPotMatch.user_profile ? currPotMatch.user_profile.interests : 'Not interested in anything.'}
           </p>
         </div>
         <div className='swipeBtns'>

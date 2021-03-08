@@ -7,9 +7,7 @@ import Profile from './pages/Profile.jsx';
 import Matches from './pages/Matches.jsx';
 
 const App = React.memo(() => {
-  const [user, setUser] = useState('');
-  const [userInfo, setUserInfo] = useState('');
-  console.log('APP');
+  const [user, setUser] = useState({});
 
   const handleSetUser = (username) => {
     setUser((prevUsername)=> prevUsername = username);

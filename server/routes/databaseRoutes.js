@@ -40,7 +40,7 @@ router.get('/users',
 router.post('/potential-matches',
   userController.addPotential,
   (req, res) => {
-    res.status(200);
+    res.status(200).json();
   }
 );
 
@@ -50,6 +50,7 @@ router.get('/matches',
   userController.addMatches,
   userController.deleteMatches,
   (req, res) => {
+    console.log(res.locals.matches, "all matches?????")
     return res.status(200).json(res.locals.matches);
   }
 );
