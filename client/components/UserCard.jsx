@@ -27,11 +27,11 @@ const UserCard = (props) => {
           <hr/>
           <p>
             <strong>Wants to study: </strong>
-            {currPotMatch.user_profile ? currPotMatch.user_profile.skills_to_improve : 'No skills to improve.'}
+            {currPotMatch.user_profile ? currPotMatch.user_profile.userInterest1 : 'No skills to improve.'}
           </p>
           <p>
             <strong>Interests: </strong>
-            {currPotMatch.user_profile ? currPotMatch.user_profile.interests : 'Not interested in anything.'}
+            {currPotMatch.user_profile ? currPotMatch.user_profile.userInterest2 : 'Not interested in anything.'}
           </p>
         </div>
         <div className='swipeBtns'>

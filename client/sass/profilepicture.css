@@ -1,4 +1,7 @@
 .profilepic{
+    max-width: 200px;
+    max-height: 200px;
     border-radius: 10%;
-    border:1px solid #021a40;
+    border:1px solid #bdd2e3;
+    box-shadow: 0px 0px 10px rgb(204, 203, 203);
 }
