@@ -47,24 +47,17 @@ function Matches(props) {
   };
 
   const generateProfileCards = () => {
-
-    // const result = words.filter(word => word.length > 6);
-
-    // matches.filter((match) => {
-      
-    // })
-
-    return matches.map((match, index) => {
-      return (
-        <ProfileCard
-          user={match.potential_matches_username}
-          key={match.potential_matches_id}
-          className="profile-card"
-        ></ProfileCard>
+    let matchset = new Set();
+    matches.forEach((match, index) => {
+      matchset.add(match.potential_matches_username);
+    })
+    const cards = [];
+    for (let value of matchset.values()) {
+      cards.push(
+        <ProfileCard user={value} className="profile-card"></ProfileCard>
       );
-    });
-  // return profilecards
-
+    }
+    return cards;
   };
 
   useEffect(() => {
